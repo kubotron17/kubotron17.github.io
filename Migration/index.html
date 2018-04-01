@@ -1,0 +1,50 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>Server For Testing JavaScript </title>
+    <link rel="stylesheet" type="text/css" href="MyStyle.css">
+</head>
+<body>
+    <script src="Scripts/main.js"></script>
+    <p id="DisMoney">Money: 0</p>
+
+    <p2 id="Manifest">You Own: <br>Clicks: 1</p2>
+
+    <p3 id="GenInfo">Generators: 0<br>GenTick: $1<br>Gentime: 4s<br>$0/Sec</p3>
+
+    <input id="Click" type="button" value="Click"/>
+    <input id="Clickx5" type="button" value="Click x5"/>
+    <input id="UpgradeClick" type="button" value="+1 Click   $25" onclick="UpgradeClick();" />
+    <input id="Gen" type="button" value="+1 Gen   $"/>
+    <input id="UpgradeGenProfit" type="button" value="+$1 Gen Profit   $250"/>
+    
+    
+    <script>
+    document.getElementById("Click").onclick = Click;
+    document.getElementById("Clickx5").onclick = Clickx5;
+    document.getElementById("Gen").onclick = BuyGen;
+    document.getElementById("UpgradeGenProfit").onclick = UpgradeGenProfit;
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', Start())
+    {
+        //alert("Loaded");
+    }
+    </script>
+    <p30>Ver 0.1c<br>Made by kubotron17</p30>
+</body>
+
+</html>
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-48339342-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-48339342-2');
+</script>
+-->
