@@ -1,0 +1,32 @@
+pMoney{
+    position: absolute;
+    left: 30px;
+    color: black;
+}
+pEnemyHP{
+    position: absolute;
+    left: 90px;
+    color: black;
+}
+
+
+input#MainGen{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+input#MainGenSpeed{
+    position: absolute;
+    top: 60px;
+    left: 30px;
+}
+input#MainGenProfit{
+    position: absolute;
+    top: 90px;
+    left: 30px;
+}
+
+pStat1{
+    position: absolute;
+    left: 240px;
+}

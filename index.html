@@ -1,0 +1,31 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>AttackOnCurrent</title>
+    <script src="Scripts/main.js"></script>
+    <script src="Scripts/maingen.js"></script>
+    <link rel="stylesheet" type="text/css" href="MyStyle.css">
+</head>
+<body>
+    <div id="Default">
+    
+        <pMoney id="DisMoney">$4</pMoney>
+    
+        <pEnemyHP id="DisEnemyHP">10/10HP</pEnemyHP>
+    </div>
+    <div id="MainScreen">
+        <input id="MainGen" type="button" class="Gen" value="MainGen  $4">
+        <input id="MainGenSpeed" type="button" class="Gen" value="MainGenSpeed x2  $25">
+        <input id="MainGenProfit" type="button" class="Gen" value="MainGenProfut x3 $20">
+    </div>
+    <div id="StatsScreen">
+        <pStat1 id="Stat1">GenTick</p>
+    </div>
+    <script>
+        document.getElementById("MainGen").onclick = BuyMainGen;
+        document.getElementById("MainGenSpeed").onclick = USpeedMainGen;
+        document.getElementById("MainGenProfit").onclick = UProfitMainGen;
+        window.onload = Start;
+    </script>
+</body>
+</html>
