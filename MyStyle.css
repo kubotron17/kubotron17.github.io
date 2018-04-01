@@ -49,3 +49,8 @@ input#NavButton2{
     top: 220px;
     font-size: 30px;
 }
+#Ads1{
+    position: absolute;
+    top: 350px;
+    width: 250px;
+}
