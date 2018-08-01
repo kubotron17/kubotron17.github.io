@@ -1,81 +1,46 @@
-<!DOCTYPE>
+<!DOCTYPE HTML>
 <html>
+
 <head>
-     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-48339342-2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-48339342-2');
-    </script>
+    <title>IdleGame v0.1</title>
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-           (adsbygoogle = window.adsbygoogle || []).push({
-           google_ad_client: "ca-pub-8712388572435412",
-           enable_page_level_ads: true
-           });
-    </script>
+    <link href="css/style.css" rel="stylesheet" />
 
+    <script src="scripts/jquery.min.js"></script>
+    <script src='scripts/swarm-numberformat.js'></script>
+    <script src="scripts/main.js"></script>
 
-    <title>AttackOnCurrent</title>
-    
-    <script src="Scripts/main.js"></script>
-    <script src="Scripts/maingen.js"></script>
-    
-    <script src="Scripts/NavMaster.js"></script>
-    
-    <link rel="stylesheet" type="text/css" href="MyStyle.css">
 </head>
+
 <body>
-    <div id="Main">
-      
-      <input id="NavButton1" type="button" value="Main">
-      <input id="NavButton2" type="button" value="About">
-      
-    </div>
     
-    <div id="Default">
+    <input type="button" onclick="autoClicker()" id="autoClickerButton" value="Start" />
     
-        <pMoney id="DisMoney">$4</pMoney>
-    
-        <pEnemyHP id="DisEnemyHP">10/10HP</pEnemyHP>
+    <div id="mainScreen">
+        <h1>IdleGame</h1>
+
+        <p id="disMoney" onclick="moneyCheat()" class="disStat">$0</p>
+
+        <input type="button" onclick="genMoney()" id="genMoneyClick" value="Gen $1" title="+$1" class="button"/>
+
+        <input type="button" onclick="upgradeGenMoney()" id="upgradeGenMoneyClick" value="Upgrade Gen Money  $20" class="button"/>
+
+        <input type="button" onclick="buyFactory()" id="buyFactoryClick" value="Buy Factory  $50" title="+$1/s  $50" class="button2"/>
+
+
+        <div id="progressScreen">
+            <b id="progressBarFactory" >1.0</b>
+
+
+        </div>
     </div>
-    <div id="MainScreen">
-        <input id="MainGen" type="button" class="Gen" value="MainGen  $4">
-        <input id="MainGenSpeed" type="button" class="Gen" value="MainGenSpeed x2  $25">
-        <input id="MainGenProfit" type="button" class="Gen" value="MainGenProfut x3 $20">
-    </div>
-    <div id="StatsScreen">
-        <pStat1 id="Stat1">GenTick</p>
-    </div>
+
     <script>
-        document.getElementById("MainGen").onclick = BuyMainGen;
-        document.getElementById("MainGenSpeed").onclick = USpeedMainGen;
-        document.getElementById("MainGenProfit").onclick = UProfitMainGen;
-        document.getElementById("NavButton1").onclick = Nav1Click;
-        document.getElementById("NavButton2").onclick = Nav2Click;
-        window.onload = Start;
+        window.onload = pageStart;
+
     </script>
-    
-    
-    <div id="Ads1">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <ins class="adsbygoogle"
-             style="display:block; text-align:center;"
-             data-ad-layout="in-article"
-             data-ad-format="fluid"
-             data-ad-client="ca-pub-8712388572435412"
-             data-ad-slot="1947531095"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    
-    
-    
-    </div>
+
 </body>
+
 </html>

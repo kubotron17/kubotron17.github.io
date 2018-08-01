@@ -1,49 +1,171 @@
-var money = 4;
+var numMoney = 50;
 
-var enemyCount = 1;
+var numGenMoney = 1;
+var amountUpgradeGenMoney = 1;
+var priceUpgradeGenMoney = 20;
+var bPriceUpgradeGenMoney = 20;
 
-var enemyMaxBaseHp = 10;
-var enemyMaxHp = 10;
-var enemyCurrentHp = 10;
+var boughtFactory = false;
+var numFactoryLvl = 1;
+var priceFactory = 50;
+var priceUpgradeFactory = 100;
+var bPriceUpgradeFactory = 100;
 
-var enemyBaseReward = 1;
-var enemyReward = 1;
+var intervalFactory = 1000;
+var timerFactory;
+var runningFactory = false;
+var timerProgressBarFactory;
+var progressBarFactory;
 
-var DisUpdateTimer = setInterval(DisUpdate, 250);
 
-function DisUpdate(){
-    document.getElementById("DisMoney").innerHTML = "$" + round(money, 1);
-    document.getElementById("DisEnemyHP").innerHTML = enemyCount + "  " + round(enemyCurrentHp, 1) + "/" + round(enemyMaxHp, 1) + "HP";
-    document.getElementById("Stat1").innerHTML = mainGenCount * (mainGenTick * mainGenTickMulti) + "$  Per Tick";
+function updateDis()
+{
+    var timeAtStart = Date.now();
+    document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
+
+    document.getElementById("genMoneyClick").value = "Gen $" + numberformat.formatShort(numGenMoney);
+    document.getElementById("upgradeGenMoneyClick").value = "+$" + numberformat.formatShort(amountUpgradeGenMoney) + " Gen Click  ||  " + "$" + numberformat.formatShort(priceUpgradeGenMoney);
+
+    var timeAtEnd = Date.now();
+    console.debug("StartTime: " + timeAtStart + "ms  EndTime: " + timeAtEnd + "ms   Difference: " + (timeAtEnd - timeAtStart) + "ms");
 }
+function genMoney()
+{
+    numMoney += numGenMoney;
+    document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
+}
+function upgradeGenMoney()
+{
+    if (numMoney >= priceUpgradeGenMoney) {
+        numMoney -= priceUpgradeGenMoney;
+        numGenMoney += amountUpgradeGenMoney;
 
+        priceUpgradeGenMoney *= 1.25;
 
-function EnemyDeathCheck(){
-    if(enemyCurrentHp <= 0){
-        enemyCount ++;
-        EnemyRewardIncrease();
-        money += enemyReward;
-        NewEnemy();
+        document.getElementById("upgradeGenMoneyClick").value = "+$" + numberformat.formatShort(amountUpgradeGenMoney) + " Gen Click  ||  " + "$" + numberformat.formatShort(priceUpgradeGenMoney);
+        document.getElementById("genMoneyClick").title = "Gen $" + numberformat.formatShort(numGenMoney);
+        updateDis();
     }
 }
 
-function NewEnemy(){
-    //enemyMaxHp = round((enemyMaxBaseHp * 1.2 ** enemyCount) * ((Math.random()*35 + 85) / 100), 1);
-    enemyMaxHp = round(enemyMaxBaseHp * 1.08 ** enemyCount, 1);
-    enemyCurrentHp = enemyMaxHp;
-    //console.log(((Math.random()*35 + 85) / 100));
-}
-function EnemyRewardIncrease(){
-    if(enemyCount % 10 == 0){
-        enemyReward = enemyBaseReward * 1.5 ** (enemyCount / 10); 
-        console.log(enemyReward + " EnemyReward");
+function buyFactory()
+{
+    if (boughtFactory === false && numMoney >= priceFactory) {
+        numMoney -= priceFactory;
+        boughtFactory = true;
+
+        document.getElementById("buyFactoryClick").value = "Buy Factory  $" + numberformat.formatShort(priceUpgradeFactory);
+        document.getElementById("buyFactoryClick").title = "+$" + numberformat.formatShort(numFactoryLvl) + "/s";
+
+        startFactory();
+        updateDis();
+    }
+    else if (boughtFactory === true && numMoney >= priceUpgradeFactory) {
+        numMoney -= priceUpgradeFactory;
+        numFactoryLvl++;
+        priceUpgradeFactory = bPriceUpgradeFactory * 1.08 ** numFactoryLvl;
+        document.getElementById("buyFactoryClick").value = "Buy Factory  $" + numberformat.formatShort(priceUpgradeFactory);
+        document.getElementById("buyFactoryClick").title = "+$" + numberformat.formatShort(numFactoryLvl) + "/s";
+        updateDis();
     }
 }
 
-function Start(){
-    clearInterval(mainGenTimer);
+function startFactory()
+{
+    if (runningFactory === false) {
+        runningFactory = true;
+        timerFactory = setInterval(tickFactory, intervalFactory);
+
+        progressBarFactory = 1;
+        document.getElementById("progressBarFactory").innerHTML = "1.0";
+        timerProgressBarFactory = setInterval(tickProgressBarFactory, 200);
+    }
 }
 
-function round(value, decimals) {
-    return Number(Math.round(value +'e'+ decimals) +'e-'+ decimals).toFixed(decimals);
+function tickFactory()
+{
+    numMoney += numFactoryLvl;
+    progressBarFactory = 1;
+    document.getElementById("progressBarFactory").innerHTML = "1.0";
+    updateDis();
+}
+
+function tickProgressBarFactory()
+{
+    progressBarFactory -= 0.2;
+    document.getElementById("progressBarFactory").innerHTML =  progressBarFactory.toFixed(1);
+}
+
+var numCheatMoney = 0;
+function moneyCheat()
+{
+    numCheatMoney += 500;
+    numMoney += numCheatMoney;
+    // updateDis();
+    updateThisDis(0, "disMoney", "inner", "$" + numberformat.formatShort(numMoney));
+}
+
+var autoClickerRunning = false;
+var timerAutoClicker;
+
+function autoClicker()
+{
+    if (autoClickerRunning === false) {
+        timerAutoClicker = setInterval(genMoney, 350);
+        autoClickerRunning = true;
+        document.getElementById("autoClickerButton").value = "Stop";
+    }
+    else if (autoClickerRunning === true) {
+        clearInterval(timerAutoClicker);
+        autoClickerRunning = false;
+        document.getElementById("autoClickerButton").value = "Start";
+    }
+}
+function updateThisDis(eMon, eId, eWhat, eString)
+{
+    if (eMon === 1) {
+        document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
+    }
+    else if (eWhat === "inner") {
+        document.getElementById(eId).innerHTML = eString;
+    }
+    else if (eWhat === "value") {
+        document.getElementById(eId).value = eString;
+    }
+    else if (eWhat === "title") {
+        document.getElementById(eId).title = eString;
+    }
+}
+var buttonsRow1;
+function pageStart()
+{
+    var timenow = new Date();
+    document.title = "Page Loaded " + timenow.getHours() + ":" + timenow.getMinutes() + ":" + timenow.getSeconds();
+    buttonsRow1 = document.getElementsByClassName("button");
+    var firstLocationLeft = 5;
+    $.each(buttonsRow1, function ()
+    {
+        this.style.left = firstLocationLeft + "px";
+        firstLocationLeft = firstLocationLeft + 55 + this.offsetWidth;
+        //this.style.left = firstLocationLeft + "px";
+        console.debug(firstLocationLeft);
+    });
+    buttonsRow2 = document.getElementsByClassName("button2");
+    var firstLocationLeft2 = 5;
+    $.each(buttonsRow2, function ()
+    {
+        this.style.top = "160px";
+        this.style.left = firstLocationLeft2 + "px";
+        firstLocationLeft2 = firstLocationLeft2 + 5 + this.offsetWidth;
+        console.debug(firstLocationLeft2);
+    });
+    //buttonsRow1.forEach(function (button, index)
+    //{
+    //    button.style.left = firstLocationLeft + "px";
+    //    firstLocationLeft += 40;
+    //}
+    //);
+    document.getElementById("upgradeGenMoneyClick").value = "+$" + numberformat.formatShort(amountUpgradeGenMoney) + " Gen Click  ||  " + "$" + numberformat.formatShort(priceUpgradeGenMoney);
+    document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
+    console.debug(numMoney);
 }

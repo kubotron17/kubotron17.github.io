@@ -1,0 +1,26 @@
+body {
+    background-color: #adadad;
+    position: absolute;
+    overflow-x: hidden;
+    left: 25px;
+    width:initial;
+}
+#autoClickerButton{
+    position:absolute;
+    top: 25px;
+    left: 175px;
+}
+input {
+    position: absolute;
+    width: initial;
+}
+#mainScreen {
+    position: absolute;
+    
+}
+#progressBarFactory {
+    position: absolute;
+    top: 161px;
+    left: -20px;
+    font-size: 17px;
+}
