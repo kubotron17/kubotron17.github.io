@@ -148,7 +148,7 @@ var buttonsRow1;
 function pageStart()
 {
     var timenow = new Date();
-    document.title = "Page Loaded " + timenow.getHours() + ":" + timenow.getMinutes() + ":" + timenow.getSeconds();
+    //document.title = "Page Loaded " + timenow.getHours() + ":" + timenow.getMinutes() + ":" + timenow.getSeconds();
     buttonsRow1 = document.getElementsByClassName("button");
     var firstLocationLeft = 5;
     $.each(buttonsRow1, function ()
