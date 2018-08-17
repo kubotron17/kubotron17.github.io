@@ -6,10 +6,10 @@ var priceUpgradeGenMoney = 20;
 var bPriceUpgradeGenMoney = 20;
 
 var boughtFactory = false;
-var numFactoryLvl = 1;
+var numFactoryLvl = 0;
 var priceFactory = 50;
-var priceUpgradeFactory = 100;
-var bPriceUpgradeFactory = 100;
+var priceUpgradeFactory = 75;
+var bPriceUpgradeFactory = 75;
 
 var intervalFactory = 1000;
 var timerFactory;
@@ -20,7 +20,7 @@ var progressBarFactory;
 
 var statsTimer = setInterval(updateStats, 2000);
 function updateStats(){
-    numMoney += 4;
+    numMoney += 6;
     document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
 }
 
@@ -58,6 +58,7 @@ function buyFactory()
 {
     if (boughtFactory === false && numMoney >= priceFactory) {
         numMoney -= priceFactory;
+        numFactoryLvl++;
         boughtFactory = true;
 
         document.getElementById("buyFactoryClick").value = "Buy Factory  $" + numberformat.formatShort(priceUpgradeFactory);
