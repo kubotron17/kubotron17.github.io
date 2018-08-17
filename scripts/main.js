@@ -176,4 +176,5 @@ function pageStart()
     document.getElementById("upgradeGenMoneyClick").value = "+$" + numberformat.formatShort(amountUpgradeGenMoney) + " Gen Click  ||  " + "$" + numberformat.formatShort(priceUpgradeGenMoney);
     document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
     console.debug(numMoney);
+    document.title = "IdleGame";
 }
