@@ -20,8 +20,9 @@ var progressBarFactory;
 
 var statsTimer = setInterval(updateStats, 2000);
 function updateStats(){
-    numMoney += 6;
-    document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
+    //numMoney += 6;
+    document.getElementById("Stat").innerHTML = "Money/click =" + numGenMoney + "<br>Money/second =" + numFactoryLvl;
+    //document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
 }
 
 function updateDis()
