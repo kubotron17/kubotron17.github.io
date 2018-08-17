@@ -18,6 +18,12 @@ var timerProgressBarFactory;
 var progressBarFactory;
 
 
+var statsTimer = setInterval(updateStats, 2000);
+function updateStats(){
+    numMoney += 2;
+    document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
+}
+
 function updateDis()
 {
     var timeAtStart = Date.now();
