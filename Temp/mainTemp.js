@@ -36,7 +36,7 @@ function updateText()
 {
     document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
 
-
+    
 }
 function updateStats()
 {
