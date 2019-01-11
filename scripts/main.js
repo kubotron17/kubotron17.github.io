@@ -44,6 +44,8 @@ function updateDis()
 function genMoney()
 {
     numGlobalProfitMulti *= 2;
+    numFactoryTickProfit = (numFactoryLvl * numFactoryProfitPerlvl) * numGlobalProfitMulti;
+
    //numMoney += numGenMoney;
    //document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
 }
