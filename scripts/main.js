@@ -1,5 +1,7 @@
 var numMoney = 50;
 
+var numGlobalProfitMulti = 1;
+
 var numGenMoney = 1;
 var amountUpgradeGenMoney = 1;
 var priceUpgradeGenMoney = 20;
@@ -11,6 +13,9 @@ var priceFactory = 50;
 var priceUpgradeFactory = 75;
 var bPriceUpgradeFactory = 75;
 
+var numFactoryProfitPerlvl = 1;
+var numFactoryTickProfit = 0;
+
 var intervalFactory = 1000;
 var timerFactory;
 var runningFactory = false;
@@ -21,7 +26,7 @@ var progressBarFactory;
 var statsTimer = setInterval(updateStats, 2000);
 function updateStats(){
     //numMoney += 6;
-    document.getElementById("Stat").innerHTML = "Money/click =" + numGenMoney + "<br>Money/second =" + numFactoryLvl;
+    document.getElementById("Stat").innerHTML = "Money/click =" + numGenMoney + "<br>Money/second =" + numFactoryTickProfit;
     //document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
 }
 
@@ -38,8 +43,9 @@ function updateDis()
 }
 function genMoney()
 {
-    numMoney += numGenMoney;
-    document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
+    numGlobalProfitMulti *= 2;
+   //numMoney += numGenMoney;
+   //document.getElementById("disMoney").innerHTML = "$" + numberformat.formatShort(numMoney);
 }
 function upgradeGenMoney()
 {
@@ -60,6 +66,9 @@ function buyFactory()
     if (boughtFactory === false && numMoney >= priceFactory) {
         numMoney -= priceFactory;
         numFactoryLvl++;
+
+        numFactoryTickProfit = (numFactoryLvl * numFactoryProfitPerlvl) * numGlobalProfitMulti;
+
         boughtFactory = true;
 
         document.getElementById("buyFactoryClick").value = "Buy Factory  $" + numberformat.formatShort(priceUpgradeFactory);
@@ -71,6 +80,9 @@ function buyFactory()
     else if (boughtFactory === true && numMoney >= priceUpgradeFactory) {
         numMoney -= priceUpgradeFactory;
         numFactoryLvl++;
+
+        numFactoryTickProfit = (numFactoryLvl * numFactoryProfitPerlvl) * numGlobalProfitMulti;
+
         priceUpgradeFactory = bPriceUpgradeFactory * 1.08 ** numFactoryLvl;
         document.getElementById("buyFactoryClick").value = "Buy Factory  $" + numberformat.formatShort(priceUpgradeFactory);
         document.getElementById("buyFactoryClick").title = "+$" + numberformat.formatShort(numFactoryLvl) + "/s";
@@ -92,7 +104,9 @@ function startFactory()
 
 function tickFactory()
 {
-    numMoney += numFactoryLvl;
+    //numMoney += numFactoryLvl;
+    numMoney += numFactoryTickProfit;
+
     progressBarFactory = 1;
     document.getElementById("progressBarFactory").innerHTML = "1.0";
     updateDis();
